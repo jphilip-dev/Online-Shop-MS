@@ -4,7 +4,9 @@ import com.jphilips.onlineshop.auth.dto.UserRequestDTO;
 import com.jphilips.onlineshop.auth.dto.UserResponseDTO;
 import com.jphilips.onlineshop.auth.entity.Role;
 import com.jphilips.onlineshop.auth.entity.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper {
     public UserResponseDTO toDto(User user){
         return UserResponseDTO.builder()
