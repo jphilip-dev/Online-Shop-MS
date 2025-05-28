@@ -2,15 +2,12 @@ package com.jphilips.onlineshop.auth.service.admin;
 
 
 import com.jphilips.onlineshop.auth.dto.AdminUpdateRequestDTO;
-import com.jphilips.onlineshop.auth.dto.UpdateUserCommand;
 import com.jphilips.onlineshop.auth.dto.UserResponseDTO;
-import com.jphilips.onlineshop.auth.entity.Role;
 import com.jphilips.onlineshop.auth.mapper.UserMapper;
 import com.jphilips.onlineshop.auth.repository.RoleRepository;
 import com.jphilips.onlineshop.auth.repository.UserRepository;
 import com.jphilips.onlineshop.auth.service.user.UserServiceHelper;
 import com.jphilips.onlineshop.shared.util.Command;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,15 +24,6 @@ public class UpdateUserAdminService implements Command<AdminUpdateRequestDTO, Us
     private final UserMapper userMapper;
 
     private static final String ADMIN_ROLE = "ADMIN";
-
-
-    @PostConstruct
-    private void init() {
-        if (roleRepository.findById(ADMIN_ROLE).isEmpty()) {
-            var newRole = new Role(ADMIN_ROLE, "ADMIN USER");
-            roleRepository.save(newRole);
-        }
-    }
 
     @Override
     public UserResponseDTO execute(AdminUpdateRequestDTO adminUpdateRequestDTO) {
