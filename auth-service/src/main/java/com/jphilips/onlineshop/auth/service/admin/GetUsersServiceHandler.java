@@ -23,7 +23,7 @@ public class GetUsersServiceHandler {
         return userMapper.toDto(user);
     }
 
-    private UserResponseDTO getUserById(Long id){
+    public UserResponseDTO getUserById(Long id){
         var user = userServiceHelper.validateUserById(id);
         return userMapper.toDto(user);
     }
