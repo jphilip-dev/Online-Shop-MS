@@ -24,7 +24,9 @@
 
     <modules>
         <module>api-gateway</module>
+        <module>shared</module>
         <module>auth-service</module>
+
     </modules>
 
 </project>
