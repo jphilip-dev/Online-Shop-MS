@@ -1,0 +1,15 @@
+services:
+  auth-service:
+    container_name: auth-service
+    build:
+      context: .
+      dockerfile: auth-service/Dockerfile
+    ports:
+      - "8081:8081" # dev purposes
+    env_file:
+      - auth-service/.env
+    networks:
+      - internal
+networks:
+  internal:
+    external: true
