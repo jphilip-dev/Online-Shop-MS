@@ -1,4 +1,16 @@
 services:
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - api-gateway/.env
+    networks:
+      - internal
+
   auth-service:
     container_name: auth-service
     build:
@@ -10,6 +22,7 @@ services:
       - auth-service/.env
     networks:
       - internal
+
 networks:
   internal:
     external: true
