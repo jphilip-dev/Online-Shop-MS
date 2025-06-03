@@ -15,6 +15,7 @@ public enum ErrorCode {
     // === Custom Application Errors ===
     USER_NOT_FOUND(400, "ERROR_USER_NOT_FOUND"),
     USER_PASSWORD_MISMATCH(401, "ERROR_PASSWORD_MISMATCH"),
+    USER_EXISTING_EMAIL(400, "ERROR_EMAIL_ALREADY_EXISTS"),
     INVALID_INPUT(400, "ERROR_INVALID_INPUT");
 
     private final int status;

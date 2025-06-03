@@ -1,8 +1,8 @@
 package com.jphilips.onlineshop.auth.service.user;
 
 import com.jphilips.onlineshop.auth.entity.User;
-import com.jphilips.onlineshop.auth.exception.UserNotFoundException;
-import com.jphilips.onlineshop.auth.exception.UserOwnershipException;
+import com.jphilips.onlineshop.auth.exception.custom.UserNotFoundException;
+import com.jphilips.onlineshop.auth.exception.custom.UserOwnershipException;
 import com.jphilips.onlineshop.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
