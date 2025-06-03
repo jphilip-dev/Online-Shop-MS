@@ -3,7 +3,7 @@ package com.jphilips.onlineshop.auth.service.admin;
 
 import com.jphilips.onlineshop.auth.dto.AdminUpdateRequestDTO;
 import com.jphilips.onlineshop.auth.dto.UserResponseDTO;
-import com.jphilips.onlineshop.auth.exception.ExistingEmailException;
+import com.jphilips.onlineshop.auth.exception.custom.ExistingEmailException;
 import com.jphilips.onlineshop.auth.mapper.UserMapper;
 import com.jphilips.onlineshop.auth.repository.RoleRepository;
 import com.jphilips.onlineshop.auth.repository.UserRepository;
