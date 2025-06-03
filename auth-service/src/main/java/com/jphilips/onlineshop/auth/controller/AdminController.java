@@ -5,6 +5,7 @@ import com.jphilips.onlineshop.auth.dto.AdminUpdateRequestDTO;
 import com.jphilips.onlineshop.auth.dto.UserResponseDTO;
 import com.jphilips.onlineshop.auth.service.admin.GetUsersServiceHandler;
 import com.jphilips.onlineshop.auth.service.admin.UpdateUserAdminService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class AdminController {
     }
 
     @PutMapping("/users")
-    public ResponseEntity<UserResponseDTO>  updateUserById(@RequestBody AdminUpdateRequestDTO adminUpdateRequestDTO) {
+    public ResponseEntity<UserResponseDTO>  updateUserById(@Valid @RequestBody AdminUpdateRequestDTO adminUpdateRequestDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(updateUserAdminService.execute(adminUpdateRequestDTO));
     }
 

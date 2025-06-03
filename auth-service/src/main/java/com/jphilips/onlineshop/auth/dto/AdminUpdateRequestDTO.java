@@ -19,7 +19,6 @@ public class AdminUpdateRequestDTO {
 
     @Email( message = "{email.invalid}")
     @NotBlank( message = "{email.blank}")
-    @UniqueEmail( message = "{email.taken}")
     private String email;
 
     @NotBlank(message = "{name.blank}")

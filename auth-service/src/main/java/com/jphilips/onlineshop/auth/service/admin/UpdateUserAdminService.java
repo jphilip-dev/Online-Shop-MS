@@ -3,10 +3,12 @@ package com.jphilips.onlineshop.auth.service.admin;
 
 import com.jphilips.onlineshop.auth.dto.AdminUpdateRequestDTO;
 import com.jphilips.onlineshop.auth.dto.UserResponseDTO;
+import com.jphilips.onlineshop.auth.exception.ExistingEmailException;
 import com.jphilips.onlineshop.auth.mapper.UserMapper;
 import com.jphilips.onlineshop.auth.repository.RoleRepository;
 import com.jphilips.onlineshop.auth.repository.UserRepository;
 import com.jphilips.onlineshop.auth.service.user.UserServiceHelper;
+import com.jphilips.onlineshop.shared.exception.ErrorCode;
 import com.jphilips.onlineshop.shared.util.Command;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +35,13 @@ public class UpdateUserAdminService implements Command<AdminUpdateRequestDTO, Us
 
         // Get save user details, this will throw exception if id doesn't exist
         var user = userServiceHelper.validateUserById(id);
+
+        // check email if changed
+        if (!user.getEmail().equals(adminUpdateRequestDTO.getEmail())){
+            if (userRepository.findByEmail(adminUpdateRequestDTO.getEmail()).isPresent()){
+                throw new ExistingEmailException(ErrorCode.USER_EXISTING_EMAIL);
+            }
+        }
 
         // Update fields
         user.setEmail(adminUpdateRequestDTO.getEmail());
