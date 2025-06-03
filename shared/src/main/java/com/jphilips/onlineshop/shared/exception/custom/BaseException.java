@@ -1,4 +1,4 @@
-package com.jphilips.onlineshop.auth.exception.custom;
+package com.jphilips.onlineshop.shared.exception.custom;
 
 import com.jphilips.onlineshop.shared.exception.ErrorCode;
 import lombok.Getter;
