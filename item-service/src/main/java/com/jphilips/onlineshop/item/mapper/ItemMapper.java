@@ -1,7 +1,9 @@
 package com.jphilips.onlineshop.item.mapper;
 
+import com.jphilips.onlineshop.item.dto.ItemRequestDTO;
 import com.jphilips.onlineshop.item.dto.ItemResponseDTO;
 import com.jphilips.onlineshop.item.entity.Item;
+import com.jphilips.onlineshop.item.enums.ItemCategory;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,6 +19,19 @@ public class ItemMapper {
                 .price(item.getPrice())
                 .brand(item.getBrand())
                 .imageUrl(item.getImageUrl())
+                .build();
+    }
+
+    public Item toEntity(ItemRequestDTO itemRequestDTO){
+        return Item.builder()
+                .sku(itemRequestDTO.getSku())
+                .name(itemRequestDTO.getName())
+                .category(ItemCategory.fromString(itemRequestDTO.getCategory()))
+                .description(itemRequestDTO.getDescription())
+                .stocks(itemRequestDTO.getStocks())
+                .price(itemRequestDTO.getPrice())
+                .brand(itemRequestDTO.getBrand())
+                .imageUrl(itemRequestDTO.getImageUrl())
                 .build();
     }
 }
