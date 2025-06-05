@@ -23,6 +23,18 @@ services:
     networks:
       - internal
 
+  item-service:
+    container_name: item-service
+    build:
+      context: .
+      dockerfile: item-service/Dockerfile
+    ports:
+      - "8082:8082" # dev purposes
+    env_file:
+      - item-service/.env
+    networks:
+      - internal
+
 networks:
   internal:
     external: true
