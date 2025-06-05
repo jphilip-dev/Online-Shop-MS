@@ -32,10 +32,10 @@ public class GetItemsServiceHandler {
     }
 
     public ItemResponseDTO getItemBySku(String sku){
-        return itemMapper.toDto(itemServiceHelper.validateItemBySku(sku));
+        return itemMapper.toDto(itemServiceHelper.getItemBySku(sku));
     }
 
     public ItemResponseDTO getItemById(Long id){
-        return itemMapper.toDto(itemServiceHelper.validateItemById(id));
+        return itemMapper.toDto(itemServiceHelper.getItemById(id));
     }
 }
