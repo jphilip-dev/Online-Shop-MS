@@ -19,7 +19,8 @@ public enum ErrorCode {
     USER_EXISTING_EMAIL(HttpStatus.BAD_REQUEST, "ERROR_EMAIL_ALREADY_EXISTS"),
     INVALID_INPUT(HttpStatus.BAD_REQUEST, "ERROR_INVALID_INPUT"),
 
-    ITEM_NOT_FOUND(HttpStatus.NOT_FOUND, "ERROR_ITEM_NOT_FOUND");
+    ITEM_NOT_FOUND(HttpStatus.NOT_FOUND, "ERROR_ITEM_NOT_FOUND"),
+    ITEM_EXISTING_SKU(HttpStatus.BAD_REQUEST, "ERROR_SKU_ALREADY_EXISTS");
 
     private final HttpStatus status;
     private final String messageCode;
