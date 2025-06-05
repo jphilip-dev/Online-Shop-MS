@@ -18,5 +18,13 @@ public enum ItemCategory {
     JEWELRY,
     FOOTWEAR,
     ACCESSORIES,
-    OTHERS
+    OTHERS;
+
+    public static ItemCategory fromString(String value) {
+        try {
+            return ItemCategory.valueOf(value.toUpperCase());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return OTHERS;
+        }
+    }
 }
