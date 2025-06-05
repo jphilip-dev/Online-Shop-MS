@@ -3,6 +3,7 @@ package com.jphilips.onlineshop.item.entity;
 import com.jphilips.onlineshop.item.enums.ItemCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "items")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Item {
 
     @Id
