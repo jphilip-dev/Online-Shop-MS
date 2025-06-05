@@ -3,6 +3,7 @@ package com.jphilips.onlineshop.item.entity;
 import com.jphilips.onlineshop.item.enums.ItemCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,11 +15,21 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private Long sellerId;
+
+    @Column(nullable = false)
+    private String sellerName;
+
+    @Column(nullable = false)
+    private String sellerEmail;
 
     @Column(nullable = false, unique = true)
     private String sku;
