@@ -38,17 +38,17 @@ public class ItemServiceHelper {
 
     public Item getItemById(Long id) {
         return itemRepository.findById(id)
-                .orElseThrow(() -> new ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND));
+                .orElseThrow(() -> new ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND, id.toString()));
     }
 
     public Item getItemBySku(String sku) {
         return itemRepository.findBySku(sku)
-                .orElseThrow(() -> new ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND));
+                .orElseThrow(() -> new ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND,sku));
     }
 
     public void validateNewSku(String sku) {
         if (itemRepository.findBySku(sku).isPresent()) {
-            throw new SkuAlreadyExistsException(ErrorCode.ITEM_EXISTING_SKU);
+            throw new SkuAlreadyExistsException(ErrorCode.ITEM_EXISTING_SKU,sku);
         }
     }
 
