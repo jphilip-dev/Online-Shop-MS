@@ -10,6 +10,8 @@ services:
       - api-gateway/.env
     networks:
       - internal
+    volumes:
+      - maven-repo:/root/.m2
 
   auth-service:
     container_name: auth-service
@@ -22,6 +24,8 @@ services:
       - auth-service/.env
     networks:
       - internal
+    volumes:
+      - maven-repo:/root/.m2
 
   item-service:
     container_name: item-service
@@ -34,7 +38,12 @@ services:
       - item-service/.env
     networks:
       - internal
+    volumes:
+      - maven-repo:/root/.m2
 
 networks:
   internal:
     external: true
+
+volumes:
+  maven-repo:
