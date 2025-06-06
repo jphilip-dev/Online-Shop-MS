@@ -5,15 +5,16 @@ import com.jphilips.onlineshop.shared.exception.ExceptionResponseHelper;
 import com.jphilips.onlineshop.shared.exception.custom.BaseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.FieldError;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.Map;
+import java.util.List;
 
 @Component
 public class ExceptionResponseService {
 
-    public ResponseEntity<ExceptionResponseDTO> handle(BaseException ex, Map<String, String> errors, WebRequest request) {
-        return ExceptionResponseHelper.createExceptionResponse(ex, errors, request);
+    public ResponseEntity<ExceptionResponseDTO> handle(BaseException ex, List<FieldError> fieldErrors, WebRequest request) {
+        return ExceptionResponseHelper.createExceptionResponse(ex, fieldErrors, request);
     }
 
     public ResponseEntity<ExceptionResponseDTO> handle(BaseException ex, WebRequest request) {

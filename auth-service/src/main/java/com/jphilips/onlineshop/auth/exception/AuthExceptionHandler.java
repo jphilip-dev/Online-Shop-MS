@@ -27,11 +27,7 @@ public class AuthExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponseDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request){
-        Map<String, String> fieldErrors = new HashMap<>();
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()){
-            fieldErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
-        }
-        return exceptionResponseService.handle(new AppException(ErrorCode.BAD_REQUEST), fieldErrors, request);
+        return exceptionResponseService.handle(new AppException(ErrorCode.BAD_REQUEST), ex.getBindingResult().getFieldErrors(), request);
     }
 
     @ExceptionHandler(Exception.class)
