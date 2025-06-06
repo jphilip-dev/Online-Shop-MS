@@ -39,7 +39,7 @@ public class UpdateUserAdminService implements Command<AdminUpdateRequestDTO, Us
         // check email if changed
         if (!user.getEmail().equals(adminUpdateRequestDTO.getEmail())){
             if (userRepository.findByEmail(adminUpdateRequestDTO.getEmail()).isPresent()){
-                throw new ExistingEmailException(ErrorCode.USER_EXISTING_EMAIL);
+                throw new ExistingEmailException(ErrorCode.USER_EXISTING_EMAIL, adminUpdateRequestDTO.getEmail());
             }
         }
 
