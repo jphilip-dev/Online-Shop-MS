@@ -1,6 +1,7 @@
 package com.jphilips.onlineshop.item.dto;
 
 import com.jphilips.onlineshop.item.validator.UniqueSku;
+import com.jphilips.onlineshop.shared.validator.groups.OnCreate;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 public class ItemRequestDTO {
 
     @NotBlank
-    @UniqueSku
+    @UniqueSku(groups = OnCreate.class)
     private String sku;
 
     @NotBlank

@@ -20,7 +20,8 @@ public enum ErrorCode {
     INVALID_INPUT(HttpStatus.BAD_REQUEST, "ERROR_INVALID_INPUT"),
 
     ITEM_NOT_FOUND(HttpStatus.NOT_FOUND, "ERROR_ITEM_NOT_FOUND"),
-    ITEM_EXISTING_SKU(HttpStatus.BAD_REQUEST, "ERROR_SKU_ALREADY_EXISTS");
+    ITEM_EXISTING_SKU(HttpStatus.BAD_REQUEST, "ERROR_SKU_ALREADY_EXISTS"),
+    ITEM_OWNER_MISMATCH(HttpStatus.FORBIDDEN, "ERROR_OWNER_MISMATCH");
 
     private final HttpStatus status;
     private final String messageCode;

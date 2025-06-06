@@ -2,11 +2,15 @@ package com.jphilips.onlineshop.item.service;
 
 import com.jphilips.onlineshop.item.entity.Item;
 import com.jphilips.onlineshop.item.exception.custom.ItemNotFoundException;
+import com.jphilips.onlineshop.item.exception.custom.ItemOwnerMismatchException;
 import com.jphilips.onlineshop.item.exception.custom.SkuAlreadyExistsException;
 import com.jphilips.onlineshop.item.repository.ItemRepository;
+import com.jphilips.onlineshop.shared.dto.UserDetailsDTO;
 import com.jphilips.onlineshop.shared.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +35,20 @@ public class ItemServiceHelper {
     public void validateNewSku(String sku){
         if (itemRepository.findBySku(sku).isPresent()){
             throw new SkuAlreadyExistsException(ErrorCode.ITEM_EXISTING_SKU);
+        }
+    }
+
+    public <T> void  validateOwnership(UserDetailsDTO userDetailsDTO, T seller){
+        if(seller instanceof Long sellerId){
+            if(!Objects.equals(userDetailsDTO.userId(), sellerId)){
+                throw new ItemOwnerMismatchException(ErrorCode.ITEM_OWNER_MISMATCH);
+            }
+        } else if (seller instanceof String sellerEmail) {
+            if (!userDetailsDTO.userEmail().equals(sellerEmail)){
+                throw new ItemOwnerMismatchException(ErrorCode.ITEM_OWNER_MISMATCH);
+            }
+        } else {
+            throw new ItemOwnerMismatchException(ErrorCode.ITEM_OWNER_MISMATCH);
         }
     }
 }
