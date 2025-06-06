@@ -24,3 +24,12 @@ spring:
             - name: JwtValidation
               args:
                 roles: USER
+
+        - id: item-service-route
+          uri: ${ITEM_SERVICE_URI}
+          predicates:
+            - Path=/items/**
+          filters:
+            - name: JwtValidation
+              args:
+                roles: USER
