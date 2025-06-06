@@ -11,6 +11,9 @@ public class ItemMapper {
     public ItemResponseDTO toDto(Item item){
         return ItemResponseDTO.builder()
                 .id(item.getId())
+                .sellerId(item.getSellerId())
+                .sellerEmail(item.getSellerEmail())
+                .sellerName(item.getSellerName())
                 .sku(item.getSku())
                 .name(item.getName())
                 .category(item.getCategory().toString())

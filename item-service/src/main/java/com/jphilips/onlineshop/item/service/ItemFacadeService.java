@@ -45,6 +45,11 @@ public class ItemFacadeService {
         return getItemQueryService.getItemById(id);
     }
 
+    // Query: Get item by SKU
+    public ItemResponseDTO getItemBySku(String sku) {
+        return getItemQueryService.getItemBySku(sku);
+    }
+
     // Query: Search items based on some criteria
     public PagedResponse<ItemResponseDTO> searchItems(String query, Pageable pageable) {
         return getItemQueryService.searchItems(query, pageable);
