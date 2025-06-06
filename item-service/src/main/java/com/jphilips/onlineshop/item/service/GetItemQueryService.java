@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class GetItemsServiceHandler {
+public class GetItemQueryService {
 
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;

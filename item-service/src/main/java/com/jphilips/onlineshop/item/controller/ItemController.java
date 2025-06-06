@@ -2,7 +2,7 @@ package com.jphilips.onlineshop.item.controller;
 
 import com.jphilips.onlineshop.item.dto.ItemResponseDTO;
 import com.jphilips.onlineshop.item.dto.PagedResponse;
-import com.jphilips.onlineshop.item.service.GetItemsServiceHandler;
+import com.jphilips.onlineshop.item.service.GetItemQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ItemController {
 
-    private final GetItemsServiceHandler getItemsServiceHandler;
+    private final GetItemQueryService getItemQueryService;
 
     @GetMapping
     public ResponseEntity<PagedResponse<ItemResponseDTO>> getItems(@PageableDefault(size = 10, sort = "name") Pageable pageable) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(getItemsServiceHandler.getAllItems(pageable));
+                .body(getItemQueryService.getAllItems(pageable));
     }
 
     @GetMapping("/search")
@@ -32,7 +32,7 @@ public class ItemController {
             @RequestParam String query,
             @PageableDefault(size = 10, sort = "name") Pageable pageable) {
 
-        return ResponseEntity.ok(getItemsServiceHandler.searchItems(query, pageable));
+        return ResponseEntity.ok(getItemQueryService.searchItems(query, pageable));
     }
 
     @GetMapping("/sku")
