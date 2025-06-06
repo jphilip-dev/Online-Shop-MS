@@ -14,14 +14,14 @@ import java.util.Map;
 
 public class ExceptionResponseHelper {
 
-    public static ResponseEntity<ExceptionResponseDTO> createExceptionResponse(
+    public static ResponseEntity<ExceptionResponseDTO> buildResponseFrom(
             BaseException ex,
             List<FieldError> fieldErrorsList,
             WebRequest request) {
 
         HttpStatus status = ex.getErrorCode().getStatus();
 
-        Map<String, String> fieldErrors = null;
+        Map<String, String> fieldErrors = null; // null is handled by JsonInclude
 
         if (fieldErrorsList != null){
             fieldErrors = new HashMap<>();
@@ -35,6 +35,7 @@ public class ExceptionResponseHelper {
                 status.value(),
                 status.getReasonPhrase(),
                 ex.getErrorCode().getMessageCode(),
+                ex.getMessage() == null || ex.getMessage().isBlank() ? null : ex.getMessage(),
                 fieldErrors,
                 request.getDescription(false).replace("uri=", "")
         );
