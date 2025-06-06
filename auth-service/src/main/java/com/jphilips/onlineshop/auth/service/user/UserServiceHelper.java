@@ -18,12 +18,12 @@ public class UserServiceHelper {
 
     public User validateUserByEmail(String email){
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND, email));
     }
 
     public User validateUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND, id.toString()));
     }
 
     public void ownershipCheck(String userEmail, String headerEmail){

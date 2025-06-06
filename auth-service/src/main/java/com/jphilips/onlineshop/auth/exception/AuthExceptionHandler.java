@@ -4,6 +4,8 @@ import com.jphilips.onlineshop.shared.dto.ExceptionResponseDTO;
 import com.jphilips.onlineshop.shared.exception.ErrorCode;
 import com.jphilips.onlineshop.shared.exception.custom.AppException;
 import com.jphilips.onlineshop.shared.exception.custom.BaseException;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,9 +27,29 @@ public class AuthExceptionHandler {
 
     private final ExceptionResponseService exceptionResponseService;
 
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<ExceptionResponseDTO> handleJwtException(JwtException ex, WebRequest request){
+        return exceptionResponseService.handle(
+                new AppException(ex instanceof ExpiredJwtException ? ErrorCode.JWT_EXPIRED : ErrorCode.JWT_INVALID),
+                request
+        );
+    }
+
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<ExceptionResponseDTO> handleAppException(AppException ex, WebRequest request){
+        return exceptionResponseService.handle(
+                ex,
+                request
+        );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponseDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request){
-        return exceptionResponseService.handle(new AppException(ErrorCode.BAD_REQUEST), ex.getBindingResult().getFieldErrors(), request);
+        return exceptionResponseService.handle(
+                new AppException(ErrorCode.BAD_REQUEST),
+                ex.getBindingResult().getFieldErrors(),
+                request
+        );
     }
 
     @ExceptionHandler(Exception.class)
@@ -35,6 +57,9 @@ public class AuthExceptionHandler {
 
         log.error("Unhandled error: {}", ex.getMessage(), ex);
 
-        return exceptionResponseService.handle(new AppException(ErrorCode.INTERNAL_SERVER_ERROR), request);
+        return exceptionResponseService.handle(
+                new AppException(ErrorCode.INTERNAL_SERVER_ERROR),
+                request
+        );
     }
 }
