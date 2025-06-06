@@ -14,10 +14,10 @@ import java.util.List;
 public class ExceptionResponseService {
 
     public ResponseEntity<ExceptionResponseDTO> handle(BaseException ex, List<FieldError> fieldErrors, WebRequest request) {
-        return ExceptionResponseHelper.createExceptionResponse(ex, fieldErrors, request);
+        return ExceptionResponseHelper.buildResponseFrom(ex, fieldErrors, request);
     }
 
     public ResponseEntity<ExceptionResponseDTO> handle(BaseException ex, WebRequest request) {
-        return ExceptionResponseHelper.createExceptionResponse(ex, null, request);
+        return ExceptionResponseHelper.buildResponseFrom(ex, null, request);
     }
 }
