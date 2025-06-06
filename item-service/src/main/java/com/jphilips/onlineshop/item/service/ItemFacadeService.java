@@ -9,10 +9,16 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ItemFacadeService {
 
+    private final AddToCartService addToCartService;
     private final CreateItemService createItemService;
     private final UpdateItemService updateItemService;
     private final DeleteItemService deleteItemService;
     private final GetItemQueryService getItemQueryService;
+
+    // Command: Item add to cart
+    public void addToCart(AddToCartCommand command) {
+        addToCartService.execute(command);
+    }
 
     // Command: Create new item
     public ItemResponseDTO createItem(CreateItemCommand command) {
