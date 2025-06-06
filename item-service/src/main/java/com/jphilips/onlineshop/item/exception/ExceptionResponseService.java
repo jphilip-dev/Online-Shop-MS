@@ -1,4 +1,4 @@
-package com.jphilips.onlineshop.auth.exception;
+package com.jphilips.onlineshop.item.exception;
 
 import com.jphilips.onlineshop.shared.dto.ExceptionResponseDTO;
 import com.jphilips.onlineshop.shared.exception.ExceptionResponseHelper;

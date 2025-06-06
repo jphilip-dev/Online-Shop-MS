@@ -13,6 +13,8 @@ public record ExceptionResponseDTO(
         String error,
         String message,
         @JsonInclude(JsonInclude.Include.NON_NULL)
+        String value,
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         Map<String, String> fieldErrors,
         String path) {
 }
