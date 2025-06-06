@@ -3,7 +3,6 @@ package com.jphilips.onlineshop.item.service;
 import com.jphilips.onlineshop.item.dto.CreateItemCommand;
 import com.jphilips.onlineshop.item.dto.ItemResponseDTO;
 import com.jphilips.onlineshop.item.mapper.ItemMapper;
-import com.jphilips.onlineshop.item.repository.ItemRepository;
 import com.jphilips.onlineshop.shared.util.Command;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,13 +19,14 @@ public class CreateItemService implements Command<CreateItemCommand, ItemRespons
     @Override
     public ItemResponseDTO execute(CreateItemCommand itemCommand) {
 
+        var userDetailsDTO = itemCommand.userDetailsDTO();
         var itemRequestDTO = itemCommand.itemRequestDTO();
 
         var newItem = itemMapper.toEntity(itemRequestDTO);
 
-        newItem.setSellerId(itemCommand.userId());
-        newItem.setSellerEmail(itemCommand.userEmail());
-        newItem.setSellerName(itemCommand.userName());
+        newItem.setSellerId(userDetailsDTO.userId());
+        newItem.setSellerEmail(userDetailsDTO.userEmail());
+        newItem.setSellerName(userDetailsDTO.userName());
 
         newItem.setActive(true);
 
