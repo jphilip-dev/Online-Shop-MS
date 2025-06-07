@@ -1,4 +1,4 @@
-package com.jphilips.onlineshop.cart.service;
+package com.jphilips.onlineshop.cart.service.query;
 
 import com.jphilips.onlineshop.cart.config.ItemServiceClient;
 import com.jphilips.onlineshop.cart.dto.CartItemResponseDTO;
