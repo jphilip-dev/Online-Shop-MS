@@ -23,7 +23,7 @@ spring:
           filters:
             - name: JwtValidation
               args:
-                roles: USER
+                roles: ADMIN
 
         - id: item-service-route
           uri: ${ITEM_SERVICE_URI}
