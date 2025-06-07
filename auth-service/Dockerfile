@@ -2,17 +2,16 @@ FROM maven:3.9.9-eclipse-temurin-21 AS builder
 
 WORKDIR /app
 
-COPY pom.xml ./
-COPY api-gateway/pom.xml ./api-gateway/
-COPY shared/pom.xml ./shared/
+COPY build-context/auth-service.xml ./pom.xml
 COPY auth-service/pom.xml ./auth-service/
-COPY item-service/pom.xml ./item-service/
+COPY shared/pom.xml ./shared/
 
-RUN mvn -B dependency:go-offline -pl auth-service -am
+RUN mvn -B dependency:go-offline -DskipTests
 
-COPY . .
+COPY auth-service ./auth-service
+COPY shared ./shared
 
-RUN mvn clean install -pl auth-service -am -DskipTests
+RUN mvn clean install -DskipTests
 
 FROM openjdk:21-jdk AS runner
 

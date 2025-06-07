@@ -18,8 +18,6 @@ services:
     build:
       context: .
       dockerfile: auth-service/Dockerfile
-    ports:
-      - "8081:8081" # dev purposes
     env_file:
       - auth-service/.env
     networks:
@@ -32,8 +30,6 @@ services:
     build:
       context: .
       dockerfile: item-service/Dockerfile
-    ports:
-      - "8082:8082" # dev purposes
     env_file:
       - item-service/.env
     networks:
