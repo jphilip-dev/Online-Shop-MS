@@ -33,6 +33,6 @@ public class CartItemManager {
 
     public CartItem getByUserIdAndItemId(Long userId, Long itemId){
         return cartRepository.findByUserIdAndItemId(userId, itemId)
-                .orElseThrow(() -> new CartItemNotFoundException(ErrorCode.CART_ITEM_NOT_FOUND));
+                .orElseThrow(() -> new CartItemNotFoundException(ErrorCode.CART_ITEM_NOT_FOUND, itemId.toString()));
     }
 }
