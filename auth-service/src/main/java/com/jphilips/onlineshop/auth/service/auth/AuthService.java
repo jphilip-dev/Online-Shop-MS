@@ -47,7 +47,7 @@ public class AuthService {
 
     public AuthDetailsDTO validateToken(String token) {
         if(token == null || !token.startsWith("Bearer ")){
-            throw new MissingJwtException(ErrorCode.UNAUTHORIZED);
+            throw new MissingJwtException(ErrorCode.JWT_MISSING);
         }
 
         var claims = jwtUtil.validateToken(token.substring(7));
