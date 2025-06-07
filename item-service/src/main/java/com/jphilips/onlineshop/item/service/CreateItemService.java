@@ -1,7 +1,7 @@
 package com.jphilips.onlineshop.item.service;
 
 import com.jphilips.onlineshop.item.dto.CreateItemCommand;
-import com.jphilips.onlineshop.item.dto.ItemResponseDTO;
+import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
 import com.jphilips.onlineshop.item.mapper.ItemMapper;
 import com.jphilips.onlineshop.shared.util.Command;
 import lombok.RequiredArgsConstructor;
