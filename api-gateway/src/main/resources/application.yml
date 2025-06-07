@@ -33,3 +33,12 @@ spring:
             - name: JwtValidation
               args:
                 roles: USER
+
+        - id: cart-service-route
+          uri: ${CART_SERVICE_URI}
+          predicates:
+            - Path=/cart/**
+          filters:
+            - name: JwtValidation
+              args:
+                roles: USER
