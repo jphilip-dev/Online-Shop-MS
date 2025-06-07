@@ -29,7 +29,14 @@ public class AddToCartService implements Command<AddToCartDTO, Void> {
             // Update count if cart item exists
             CartItem cartItem = optionalCartItem.get();
             cartItem.setCount(cartItem.getCount() + command.count());
+
+            // fallback
+            if (cartItem.getCount() < 1){
+                cartItem.setCount(1);
+            }
+
             cartItemRepository.save(cartItem);
+
         } else {
             CartItem newCartItem = new CartItem(
                     null,
