@@ -5,12 +5,16 @@ import com.jphilips.onlineshop.shared.dto.AuthDetailsDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -28,11 +32,6 @@ public class JwtValidationGatewayFilterFactory extends AbstractGatewayFilterFact
     public GatewayFilter apply(RoleBasedAccessConfig config) {
         return (exchange, chain) -> {
             String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-
-            if (token == null || !token.startsWith("Bearer ")) {
-                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                return exchange.getResponse().setComplete();
-            }
 
             return webClient.get()
                     .uri("/auth/validate")
@@ -73,6 +72,19 @@ public class JwtValidationGatewayFilterFactory extends AbstractGatewayFilterFact
                         return chain.filter(mutatedExchange);
                     })
                     .onErrorResume(error -> {
+                        if (error instanceof WebClientResponseException ex) {
+                            exchange.getResponse().setStatusCode(ex.getStatusCode());
+
+                            // Set content-type and return the structured body as-is
+                            exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+                            DataBuffer buffer = exchange.getResponse()
+                                    .bufferFactory()
+                                    .wrap(ex.getResponseBodyAsByteArray());
+
+                            return exchange.getResponse().writeWith(Mono.just(buffer));
+                        }
+
+                        // Fallback: generic 401
                         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                         return exchange.getResponse().setComplete();
                     });
