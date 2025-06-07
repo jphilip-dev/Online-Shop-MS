@@ -1,6 +1,11 @@
 package com.jphilips.onlineshop.item.service;
 
-import com.jphilips.onlineshop.item.dto.*;
+import com.jphilips.onlineshop.item.dto.AddToCartCommand;
+import com.jphilips.onlineshop.item.dto.CreateItemCommand;
+import com.jphilips.onlineshop.item.dto.DeleteItemCommand;
+import com.jphilips.onlineshop.item.dto.UpdateItemCommand;
+import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
+import com.jphilips.onlineshop.shared.dto.PagedResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

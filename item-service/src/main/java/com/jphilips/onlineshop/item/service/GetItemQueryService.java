@@ -1,7 +1,7 @@
 package com.jphilips.onlineshop.item.service;
 
 import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
-import com.jphilips.onlineshop.item.dto.PagedResponse;
+import com.jphilips.onlineshop.shared.dto.PagedResponse;
 import com.jphilips.onlineshop.item.mapper.ItemMapper;
 import com.jphilips.onlineshop.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
