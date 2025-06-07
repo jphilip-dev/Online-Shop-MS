@@ -1,13 +1,15 @@
 package com.jphilips.onlineshop.item.service;
 
-import com.jphilips.onlineshop.item.dto.ItemResponseDTO;
-import com.jphilips.onlineshop.item.dto.PagedResponse;
+import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
+import com.jphilips.onlineshop.shared.dto.PagedResponse;
 import com.jphilips.onlineshop.item.mapper.ItemMapper;
 import com.jphilips.onlineshop.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +39,12 @@ public class GetItemQueryService {
 
     public ItemResponseDTO getItemById(Long id){
         return itemMapper.toDto(itemServiceHelper.getItemById(id));
+    }
+
+    public List<ItemResponseDTO> getItemsByIds(List<Long> ids) {
+        return itemRepository.findAllById(ids)
+                .stream()
+                .map(itemMapper::toDto)
+                .toList();
     }
 }

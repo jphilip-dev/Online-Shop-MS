@@ -1,8 +1,9 @@
 package com.jphilips.onlineshop.item.controller;
 
 import com.jphilips.onlineshop.item.dto.*;
-import com.jphilips.onlineshop.item.service.GetItemQueryService;
 import com.jphilips.onlineshop.item.service.ItemFacadeService;
+import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
+import com.jphilips.onlineshop.shared.dto.PagedResponse;
 import com.jphilips.onlineshop.shared.dto.UserDetailsDTO;
 import com.jphilips.onlineshop.shared.validator.groups.OnCreate;
 import jakarta.validation.groups.Default;

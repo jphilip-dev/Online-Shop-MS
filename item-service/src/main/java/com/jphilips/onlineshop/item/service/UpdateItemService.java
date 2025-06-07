@@ -1,6 +1,6 @@
 package com.jphilips.onlineshop.item.service;
 
-import com.jphilips.onlineshop.item.dto.ItemResponseDTO;
+import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
 import com.jphilips.onlineshop.item.dto.UpdateItemCommand;
 import com.jphilips.onlineshop.item.enums.ItemCategory;
 import com.jphilips.onlineshop.item.mapper.ItemMapper;

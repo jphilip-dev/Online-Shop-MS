@@ -1,7 +1,7 @@
 package com.jphilips.onlineshop.item.mapper;
 
 import com.jphilips.onlineshop.item.dto.ItemRequestDTO;
-import com.jphilips.onlineshop.item.dto.ItemResponseDTO;
+import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
 import com.jphilips.onlineshop.item.entity.Item;
 import com.jphilips.onlineshop.item.enums.ItemCategory;
 import org.springframework.stereotype.Component;
