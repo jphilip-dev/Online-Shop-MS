@@ -23,11 +23,8 @@
     </properties>
 
     <modules>
-        <module>api-gateway</module>
-        <module>shared</module>
-        <module>auth-service</module>
-        <module>item-service</module>
         <module>cart-service</module>
+        <module>shared</module>
     </modules>
 
 </project>

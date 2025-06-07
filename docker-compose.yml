@@ -37,6 +37,18 @@ services:
     volumes:
       - maven-repo:/root/.m2
 
+  cart-service:
+    container_name: cart-service
+    build:
+      context: .
+      dockerfile: cart-service/Dockerfile
+    env_file:
+      - cart-service/.env
+    networks:
+      - internal
+    volumes:
+      - maven-repo:/root/.m2
+
 networks:
   internal:
     external: true

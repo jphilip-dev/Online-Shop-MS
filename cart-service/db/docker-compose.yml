@@ -1,0 +1,17 @@
+services:
+  cart-service-db:
+    container_name: cart-service-db
+    image: mysql:8.3.0
+    environment:
+      MYSQL_DATABASE: cart
+      MYSQL_USER: ${SPRING_DATASOURCE_USERNAME}
+      MYSQL_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${SPRING_DATASOURCE_ROOT_PASSWORD}
+    volumes:
+      - ${MYSQL_DATA_VOLUME}:/var/lib/mysql
+    networks:
+      - internal
+
+networks:
+  internal:
+    external: true
