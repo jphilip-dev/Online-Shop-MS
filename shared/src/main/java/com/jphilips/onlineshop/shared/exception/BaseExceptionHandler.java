@@ -19,6 +19,14 @@ import java.util.Map;
 @Slf4j
 public abstract class BaseExceptionHandler {
 
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<ExceptionResponseDTO> handleAppException(AppException ex, WebRequest request){
+        return buildResponseFrom(
+                ex,
+                request
+        );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponseDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request){
         return buildResponseFrom(
@@ -35,9 +43,13 @@ public abstract class BaseExceptionHandler {
 
         return buildResponseFrom(
                 new AppException(ErrorCode.INTERNAL_SERVER_ERROR),
-                null,
                 request
         );
+    }
+
+    protected ResponseEntity<ExceptionResponseDTO> buildResponseFrom(BaseException ex, WebRequest request) {
+        return buildResponseFrom(ex, null,request);
+
     }
 
     protected ResponseEntity<ExceptionResponseDTO> buildResponseFrom(
