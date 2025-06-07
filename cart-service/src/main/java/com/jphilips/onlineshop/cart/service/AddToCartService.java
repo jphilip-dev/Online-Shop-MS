@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -34,7 +35,9 @@ public class AddToCartService implements Command<AddToCartDTO, Void> {
                     null,
                     command.userId(),
                     command.itemId(),
-                    command.count());
+                    command.count(),
+                    LocalDateTime.now()
+            );
             cartItemRepository.save(newCartItem);
         }
 

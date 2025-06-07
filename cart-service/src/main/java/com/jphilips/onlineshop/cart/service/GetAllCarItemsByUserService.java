@@ -11,10 +11,10 @@ import com.jphilips.onlineshop.shared.dto.PagedResponse;
 import com.jphilips.onlineshop.shared.util.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 public class GetAllCarItemsByUserService implements Query<GetAllCarItemsByUserQuery, PagedResponse<CartItemResponseDTO>> {
 
     private final CartItemRepository cartItemRepository;
-    private final CartServiceHelper cartServiceHelper;
     private final CartItemMapper cartItemMapper;
 
     private final ItemServiceClient itemServiceClient;
@@ -34,7 +33,15 @@ public class GetAllCarItemsByUserService implements Query<GetAllCarItemsByUserQu
     @Override
     public PagedResponse<CartItemResponseDTO> execute(GetAllCarItemsByUserQuery query) {
 
-        Page<CartItem> cartItemsPage = cartItemRepository.findByUserId(query.userId(), query.pageable());
+        Page<CartItem> cartItemsPage = cartItemRepository.findByUserId(
+                query.userId(),
+                PageRequest.of(
+                        query.pageable().getPageNumber(),
+                        query.pageable().getPageSize(),
+                        Sort.by(Sort.Direction.DESC, "lastUpdateAt")
+                )
+        );
+
 
         List<Long> itemIds = cartItemsPage
                 .stream()

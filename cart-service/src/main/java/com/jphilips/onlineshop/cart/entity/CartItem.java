@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "cart",
         uniqueConstraints = @UniqueConstraint(columnNames = {"userId", "itemId"}))
@@ -25,5 +27,7 @@ public class CartItem {
 
     @Column(nullable = false)
     private Integer count;
-
+    
+    @Column(nullable = false)
+    private LocalDateTime lastUpdateAt;
 }
