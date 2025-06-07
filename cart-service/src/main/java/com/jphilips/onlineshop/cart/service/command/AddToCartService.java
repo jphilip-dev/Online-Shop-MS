@@ -1,7 +1,8 @@
-package com.jphilips.onlineshop.cart.service;
+package com.jphilips.onlineshop.cart.service.command;
 
 import com.jphilips.onlineshop.cart.entity.CartItem;
 import com.jphilips.onlineshop.cart.repository.CartItemRepository;
+import com.jphilips.onlineshop.cart.service.helper.CartServiceHelper;
 import com.jphilips.onlineshop.shared.dto.AddToCartDTO;
 import com.jphilips.onlineshop.shared.util.Command;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AddToCartService implements Command<AddToCartDTO, Void> {
 
+    private final CartServiceHelper cartServiceHelper;
     private final CartItemRepository cartItemRepository;
 
     @Override
@@ -35,7 +37,7 @@ public class AddToCartService implements Command<AddToCartDTO, Void> {
                 cartItem.setCount(1);
             }
 
-            cartItemRepository.save(cartItem);
+            cartServiceHelper.save(cartItem);
 
         } else {
             CartItem newCartItem = new CartItem(
@@ -45,7 +47,7 @@ public class AddToCartService implements Command<AddToCartDTO, Void> {
                     command.count(),
                     LocalDateTime.now()
             );
-            cartItemRepository.save(newCartItem);
+            cartServiceHelper.save(newCartItem);
         }
 
         return null;
