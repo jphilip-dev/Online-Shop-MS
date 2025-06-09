@@ -35,8 +35,13 @@ public class ItemRequestDTO {
     @DecimalMin("1.00")
     private BigDecimal price;
 
+    @NotNull
+    private Boolean isActive;
+
     private String brand;
 
     private String imageUrl;
+
+
 
 }

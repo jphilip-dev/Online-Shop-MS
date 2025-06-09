@@ -36,6 +36,7 @@ public class UpdateItemService implements Command<UpdateItemCommand, ItemRespons
         item.setDescription(itemRequestDto.getDescription());
         item.setStocks(itemRequestDto.getStocks());
         item.setPrice(itemRequestDto.getPrice());
+        item.setActive(itemRequestDto.getIsActive());
 
         // SKU check and validation
         if(!item.getSku().equals(itemRequestDto.getSku())){

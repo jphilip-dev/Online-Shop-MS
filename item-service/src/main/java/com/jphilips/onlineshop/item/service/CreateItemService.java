@@ -28,7 +28,7 @@ public class CreateItemService implements Command<CreateItemCommand, ItemRespons
         newItem.setSellerEmail(userDetailsDTO.userEmail());
         newItem.setSellerName(userDetailsDTO.userName());
 
-        newItem.setActive(true);
+        newItem.setActive(itemRequestDTO.getIsActive());
 
         newItem.setCreatedAt(LocalDateTime.now());
         newItem.setUpdatedAt(LocalDateTime.now());
