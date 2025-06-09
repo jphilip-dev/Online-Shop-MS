@@ -48,13 +48,21 @@ public abstract class BaseExceptionHandler {
     }
 
     protected ResponseEntity<ExceptionResponseDTO> buildResponseFrom(BaseException ex, WebRequest request) {
-        return buildResponseFrom(ex, null,request);
+        return buildResponseFrom(ex, null,null, request);
+    }
+    protected ResponseEntity<ExceptionResponseDTO> buildResponseFrom(BaseException ex,List<FieldError> fieldErrorsList, WebRequest request) {
+        return buildResponseFrom(ex, fieldErrorsList,null, request);
+
+    }
+    protected ResponseEntity<ExceptionResponseDTO> buildResponseFrom(BaseException ex,Map<Long, String> itemErrors, WebRequest request) {
+        return buildResponseFrom(ex, null,itemErrors, request);
 
     }
 
     protected ResponseEntity<ExceptionResponseDTO> buildResponseFrom(
             BaseException ex,
             List<FieldError> fieldErrorsList,
+            Map<Long, String> itemErrors,
             WebRequest request) {
 
         HttpStatus status = ex.getErrorCode().getStatus();
@@ -75,6 +83,7 @@ public abstract class BaseExceptionHandler {
                 ex.getErrorCode().getMessageCode(),
                 ex.getMessage() == null || ex.getMessage().isBlank() ? null : ex.getMessage(),
                 fieldErrors,
+                itemErrors,
                 request.getDescription(false).replace("uri=", "")
         );
 
