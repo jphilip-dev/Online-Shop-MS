@@ -1,13 +1,15 @@
-package com.jphilips.onlineshop.cart.service;
+package com.jphilips.onlineshop.cart.service.command;
 
 import com.jphilips.onlineshop.cart.entity.CartItem;
 import com.jphilips.onlineshop.cart.repository.CartItemRepository;
+import com.jphilips.onlineshop.cart.service.helper.CartItemManager;
 import com.jphilips.onlineshop.shared.dto.AddToCartDTO;
 import com.jphilips.onlineshop.shared.util.Command;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -15,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AddToCartService implements Command<AddToCartDTO, Void> {
 
+    private final CartItemManager cartItemManager;
     private final CartItemRepository cartItemRepository;
 
     @Override
@@ -28,14 +31,23 @@ public class AddToCartService implements Command<AddToCartDTO, Void> {
             // Update count if cart item exists
             CartItem cartItem = optionalCartItem.get();
             cartItem.setCount(cartItem.getCount() + command.count());
-            cartItemRepository.save(cartItem);
+
+            // fallback
+            if (cartItem.getCount() < 1){
+                cartItem.setCount(1);
+            }
+
+            cartItemManager.save(cartItem);
+
         } else {
             CartItem newCartItem = new CartItem(
                     null,
                     command.userId(),
                     command.itemId(),
-                    command.count());
-            cartItemRepository.save(newCartItem);
+                    command.count(),
+                    LocalDateTime.now()
+            );
+            cartItemManager.save(newCartItem);
         }
 
         return null;

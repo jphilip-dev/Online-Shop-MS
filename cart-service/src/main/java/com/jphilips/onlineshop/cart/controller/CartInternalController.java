@@ -1,6 +1,6 @@
 package com.jphilips.onlineshop.cart.controller;
 
-import com.jphilips.onlineshop.cart.service.AddToCartService;
+import com.jphilips.onlineshop.cart.service.command.AddToCartService;
 import com.jphilips.onlineshop.shared.dto.AddToCartDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

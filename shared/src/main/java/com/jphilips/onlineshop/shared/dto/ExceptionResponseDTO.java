@@ -16,5 +16,7 @@ public record ExceptionResponseDTO(
         String value,
         @JsonInclude(JsonInclude.Include.NON_NULL)
         Map<String, String> fieldErrors,
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        Map<Long, String> itemErrors,
         String path) {
 }

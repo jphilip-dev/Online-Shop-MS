@@ -1,5 +1,6 @@
 package com.jphilips.onlineshop.item.service;
 
+import com.jphilips.onlineshop.item.entity.Item;
 import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
 import com.jphilips.onlineshop.shared.dto.PagedResponse;
 import com.jphilips.onlineshop.item.mapper.ItemMapper;
@@ -44,6 +45,7 @@ public class GetItemQueryService {
     public List<ItemResponseDTO> getItemsByIds(List<Long> ids) {
         return itemRepository.findAllById(ids)
                 .stream()
+                .filter(Item::isActive)
                 .map(itemMapper::toDto)
                 .toList();
     }
