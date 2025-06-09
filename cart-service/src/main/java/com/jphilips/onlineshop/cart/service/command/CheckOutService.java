@@ -54,32 +54,15 @@ public class CheckOutService implements Command<CheckOutCommand, Void> {
             try {
                 ExceptionResponseDTO errorResponse = objectMapper.readValue(ex.contentUTF8(), ExceptionResponseDTO.class);
                 Map<Long, String> itemErrorsFromService = errorResponse.itemErrors();
-                throw new CheckOutException(ErrorCode.CART_CHECKOUT_ERROR, itemErrorsFromService);
+                throw new CheckOutException(ErrorCode.CHECKOUT_ERROR, itemErrorsFromService);
             } catch (JsonProcessingException  e) {
-                throw new CheckOutException(ErrorCode.CART_CHECKOUT_ERROR, null);
+                throw new CheckOutException(ErrorCode.CHECKOUT_ERROR, null);
             }
         }
+
+        // Success
+        // remove cartItem
+        cartItemManager.delete(cartItems);
+
     }
 }
-
-
-
-//        Map<Long, ItemResponseDTO> itemMap = itemServiceClient.getItemsByIds(command.itemIds())
-//                .stream()
-//                .collect(Collectors.toMap(ItemResponseDTO::id, Function.identity()));
-
-//        Map<Long, String> itemErrors = new HashMap<>();
-//
-//        for (CartItem cartItem : cartItems) {
-//            ItemResponseDTO item = itemMap.get(cartItem.getItemId());
-//            // Item no longer available or stock is low
-//            if (item == null) {
-//                itemErrors.put(cartItem.getItemId(), ErrorCode.ITEM_NOT_AVAILABLE.getMessageCode());
-//            } else if(cartItem.getCount() > item.stocks()) {
-//                itemErrors.put(cartItem.getItemId(), ErrorCode.ITEM_LOW_STOCK.getMessageCode());
-//            }
-//        }
-//
-//        if(!itemErrors.isEmpty()){
-//            throw new CheckOutException(ErrorCode.CART_CHECKOUT_ERROR, itemErrors);
-//        }

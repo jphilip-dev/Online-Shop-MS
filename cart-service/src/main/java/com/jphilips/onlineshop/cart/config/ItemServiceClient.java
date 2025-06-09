@@ -16,6 +16,6 @@ public interface ItemServiceClient {
     @GetMapping("/internal/items")
     List<ItemResponseDTO> getItemsByIds(@RequestParam List<Long> ids);
 
-    @PostMapping("/internal/checkout")
+    @PostMapping("/internal/items/checkout")
     void checkoutItems(@RequestBody CheckoutDTO checkoutDTO);
 }

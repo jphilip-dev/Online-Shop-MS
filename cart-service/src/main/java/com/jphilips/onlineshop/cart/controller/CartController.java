@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cart")
 @RequiredArgsConstructor
@@ -30,6 +32,16 @@ public class CartController {
             @PathVariable Long cartItemId){
 
         cartItemFacadeService.deleteCartItem(new DeleteCartItemCommand(userId, cartItemId));
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/checkout")
+    public ResponseEntity<Void> checkoutItems(
+            @RequestHeader(value = "X-User-Id") Long userId,
+            @RequestParam List<Long> itemIds
+            ){
+        cartItemFacadeService.checkoutItems(userId, itemIds);
 
         return ResponseEntity.noContent().build();
     }

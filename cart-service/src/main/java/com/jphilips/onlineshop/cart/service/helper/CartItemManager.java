@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,10 @@ public class CartItemManager {
     public void delete(CartItem cartItem){
         log.info("User: {} removed item: {} from own cart", cartItem.getUserId(), cartItem.getItemId());
          cartRepository.delete(cartItem);
+    }
+
+    public void delete(List<CartItem> cartItems){
+        cartRepository.deleteAll(cartItems);
     }
 
     public CartItem getByUserIdAndItemId(Long userId, Long itemId){

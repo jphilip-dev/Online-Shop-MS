@@ -3,6 +3,7 @@ package com.jphilips.onlineshop.shared.exception;
 import com.jphilips.onlineshop.shared.dto.ExceptionResponseDTO;
 import com.jphilips.onlineshop.shared.exception.custom.AppException;
 import com.jphilips.onlineshop.shared.exception.custom.BaseException;
+import com.jphilips.onlineshop.shared.exception.custom.CheckOutException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,16 @@ import java.util.Map;
 
 @Slf4j
 public abstract class BaseExceptionHandler {
+
+    @ExceptionHandler(CheckOutException.class)
+    public ResponseEntity<ExceptionResponseDTO> handleCheckOutException(CheckOutException ex, WebRequest request){
+        return buildResponseFrom(
+                ex,
+                ex.getItemErrors(),
+                request
+        );
+    }
+
 
     @ExceptionHandler(AppException.class)
     public ResponseEntity<ExceptionResponseDTO> handleAppException(AppException ex, WebRequest request){
