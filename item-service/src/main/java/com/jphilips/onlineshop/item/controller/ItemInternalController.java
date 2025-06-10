@@ -4,12 +4,14 @@ import com.jphilips.onlineshop.item.service.CheckoutItemsService;
 import com.jphilips.onlineshop.item.service.GetItemQueryService;
 import com.jphilips.onlineshop.shared.dto.CheckoutDTO;
 import com.jphilips.onlineshop.shared.dto.ItemResponseDTO;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Hidden
 @RestController
 @RequestMapping("/internal/items")
 @RequiredArgsConstructor

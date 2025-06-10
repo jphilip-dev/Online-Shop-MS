@@ -2,6 +2,28 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: auth-service-docs
+          uri: ${AUTH_SERVICE_URI}
+          predicates:
+            - Path=/auth-service-docs/**
+          filters:
+            - StripPrefix=1
+
+        - id: item-service-docs
+          uri: ${ITEM_SERVICE_URI}
+          predicates:
+            - Path=/item-service-docs/**
+          filters:
+            - StripPrefix=1
+
+        - id: cart-service-docs
+          uri: ${CART_SERVICE_URI}
+          predicates:
+            - Path=/cart-service-docs/**
+          filters:
+            - StripPrefix=1
+
+
         - id: auth-service-route
           uri: ${AUTH_SERVICE_URI}
           predicates:
@@ -42,3 +64,14 @@ spring:
             - name: JwtValidation
               args:
                 roles: USER
+
+springdoc:
+  swagger-ui:
+    path: /docs
+    urls:
+      - name: Auth Service - User Login, Registration and Admin Controls
+        url: /auth-service-docs/v3/api-docs
+      - name: Item Service - Product Catalog
+        url: /item-service-docs/v3/api-docs
+      - name: Cart Service - Shopping Cart
+        url: /cart-service-docs/v3/api-docs
